@@ -16,6 +16,7 @@ body {
   max-width: 1000px;
   margin-inline: 50px;
   background-color: black;
+  border-radius: .25rem;
 }
 
 .video-container.theater,
@@ -25,7 +26,7 @@ body {
 }
 
 .video-container.theater {
-  max-height: 90vh;
+  max-height: 80vh;
 }
 
 .video-container.full-screen {

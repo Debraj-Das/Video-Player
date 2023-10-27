@@ -21,7 +21,6 @@ inputFile.addEventListener("change", function () {
   const file = inputFile.files[0];
   const videourl = URL.createObjectURL(file);
   video.setAttribute("src", videourl);
-  video.play();
 
   UpdateVideoName(file.name);
 
@@ -37,7 +36,6 @@ options.addEventListener("change", function () {
   const file = videoList[fileno];
   const videourl = URL.createObjectURL(file);
   video.setAttribute("src", videourl);
-  video.play();
    
   UpdateVideoName(file.name);
 });
