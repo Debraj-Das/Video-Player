@@ -3,7 +3,7 @@
 }
 
 body {
-  margin: 10px;
+  margin: 0px;
 }
 
 .container
@@ -13,16 +13,10 @@ body {
 
 .video-container {
   position: relative;
-  width: 60%;
   max-width: 1000px;
   margin-inline: 50px;
   background-color: black;
 }
-
-/* .discription
-{
-  
-} */
 
 .video-container.theater,
 .video-container.full-screen {
