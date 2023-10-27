@@ -1,5 +1,4 @@
 const playPauseBtn = document.querySelector(".play-pause-btn");
-const theaterBtn = document.querySelector(".theater-btn");
 const fullScreenBtn = document.querySelector(".full-screen-btn");
 const miniPlayerBtn = document.querySelector(".mini-player-btn");
 const muteBtn = document.querySelector(".mute-btn");
@@ -21,8 +20,7 @@ inputFile.addEventListener("change", function () {
   const file = inputFile.files[0];
   const videourl = URL.createObjectURL(file);
   video.setAttribute("src", videourl);
-
-  UpdateVideoName(file.name);
+  UpdateVideo(file.name);
 
   videoList.push(file);
   let newoption = document.createElement("option");
@@ -36,12 +34,12 @@ options.addEventListener("change", function () {
   const file = videoList[fileno];
   const videourl = URL.createObjectURL(file);
   video.setAttribute("src", videourl);
-   
-  UpdateVideoName(file.name);
+  UpdateVideo(file.name);
 });
 
-function UpdateVideoName(name) {
-  // videoName.innerHTML = name;
+function UpdateVideo(name) {
+  videoName.innerHTML = name;
+  video.autofocus = true;
 }
 
 // Run this function when the submit button is clicked
@@ -63,16 +61,22 @@ document.addEventListener("keydown", (e) => {
       toggleFullScreenMode();
       break;
 
-    case "t":
-      toggleTheaterMode();
-      break;
-
     case "i":
       toggleMiniPlayerMode();
       break;
 
     case "m":
       toggleMute();
+      break;
+
+    case "u":
+    case "arrowup":
+      increaseVolume();
+      break;
+      
+    case "o":
+    case "arrowdown":
+      decreaseVolume();
       break;
 
     case "arrowleft":
@@ -97,6 +101,10 @@ document.addEventListener("keydown", (e) => {
 
     case "d":
       increasePlaybackSpeed();
+      break;
+
+    case "r":
+      resetSpeed();
       break;
   }
 });
@@ -132,17 +140,10 @@ function toggleScrubbing(e) {
 function handleTimelineUpdate(e) {
   const rect = timelineContainer.getBoundingClientRect();
   const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
-  const previewImgNumber = Math.max(
-    1,
-    Math.floor((percent * video.duration) / 10)
-  );
-  const previewImgSrc = `assets/previewImgs/preview${previewImgNumber}.jpg`;
-  previewImg.src = previewImgSrc;
   timelineContainer.style.setProperty("--preview-position", percent);
 
   if (isScrubbing) {
     e.preventDefault();
-    thumbnailImg.src = previewImgSrc;
     timelineContainer.style.setProperty("--progress-position", percent);
   }
 }
@@ -168,6 +169,11 @@ function decreasePlaybackSpeed() {
   if (newPlaybackRate < 0.25) newPlaybackRate = 1;
   video.playbackRate = newPlaybackRate;
   speedBtn.textContent = `${newPlaybackRate}x`;
+}
+
+function resetSpeed() {
+  video.playbackRate = 1;
+  speedBtn.textContent = "1x";
 }
 
 // Duration
@@ -212,6 +218,30 @@ function toggleMute() {
   video.muted = !video.muted;
 }
 
+function increaseVolume() {
+  let newVolume = video.volume + 0.1;
+  if (newVolume > 1) newVolume = 1;
+  video.volume = newVolume;
+  volumeSlider.value = newVolume;
+
+   volumeSlider.classList.add("show-volume-slider");
+   setTimeout(function() {
+    volumeSlider.classList.remove("show-volume-slider"); 
+}, 500);
+}
+
+function decreaseVolume() {
+  let newVolume = video.volume - 0.1;
+  if (newVolume < 0) newVolume = 0;
+  video.volume = newVolume;
+  volumeSlider.value = newVolume;
+
+  volumeSlider.classList.add("show-volume-slider");
+   setTimeout(function() {
+    volumeSlider.classList.remove("show-volume-slider"); 
+}, 500);
+}
+
 video.addEventListener("volumechange", () => {
   volumeSlider.value = video.volume;
   let volumeLevel;
@@ -228,13 +258,8 @@ video.addEventListener("volumechange", () => {
 });
 
 // View Modes
-theaterBtn.addEventListener("click", toggleTheaterMode);
 fullScreenBtn.addEventListener("click", toggleFullScreenMode);
 miniPlayerBtn.addEventListener("click", toggleMiniPlayerMode);
-
-function toggleTheaterMode() {
-  videoContainer.classList.toggle("theater");
-}
 
 function toggleFullScreenMode() {
   if (document.fullscreenElement == null) {
@@ -274,8 +299,10 @@ function togglePlay() {
 
 video.addEventListener("play", () => {
   videoContainer.classList.remove("paused");
+  playPauseBtn.setAttribute("title", "Pause (k)");
 });
 
 video.addEventListener("pause", () => {
   videoContainer.classList.add("paused");
+  playPauseBtn.setAttribute("title", "Play (k)");
 });

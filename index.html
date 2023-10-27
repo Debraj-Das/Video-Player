@@ -14,18 +14,15 @@
 
 <body>
   <div class="container p-0 m-0">
-    <div class="row my-4 mx-0">
-      <div class="video-container paused col-8 mx-4" data-volume-level="high">
-        <img class="thumbnail-img">
+    <div class="row my-3 mx-0">
+      <div class="video-container paused col-8 mx-3" data-volume-level="high">
         <div class="video-controls-container">
           <div class="timeline-container">
             <div class="timeline">
-              <img class="preview-img">
-              <div class="thumb-indicator"></div>
             </div>
           </div>
           <div class="controls">
-            <button class="play-pause-btn">
+            <button class="play-pause-btn" title="Play (k)">
               <svg class="play-icon" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
               </svg>
@@ -34,7 +31,7 @@
               </svg>
             </button>
             <div class="volume-container">
-              <button class="mute-btn">
+              <button class="mute-btn" title="Mute (m)">
                 <svg class="volume-high-icon" viewBox="0 0 24 24">
                   <path fill="currentColor"
                     d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
@@ -48,33 +45,23 @@
                     d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z" />
                 </svg>
               </button>
-              <input class="volume-slider" type="range" min="0" max="1" step="any" value="1">
+              <input class="volume-slider" type="range" min="0" max="1" step="any" value="1" title="Volumn (u/o)">
             </div>
             <div class="duration-container">
               <div class="current-time">0:00</div>
               /
               <div class="total-time"></div>
             </div>
-            <button class="speed-btn wide-btn">
+            <button class="speed-btn wide-btn" title="Speed (d/s)">
               1x
             </button>
-            <button class="mini-player-btn">
+            <button class="mini-player-btn" title="MiniPlayer (i)">
               <svg viewBox="0 0 24 24">
                 <path fill="currentColor"
                   d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zm-10-7h9v6h-9z" />
               </svg>
             </button>
-            <button class="theater-btn">
-              <svg class="tall" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                  d="M19 6H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H5V8h14v8z" />
-              </svg>
-              <svg class="wide" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                  d="M19 7H5c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 8H5V9h14v6z" />
-              </svg>
-            </button>
-            <button class="full-screen-btn">
+            <button class="full-screen-btn" title="FullScreen (f)">
               <svg class="open" viewBox="0 0 24 24">
                 <path fill="currentColor"
                   d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
@@ -89,21 +76,25 @@
         <video src="./asset/Video.mp4">
         </video>
       </div>
-      <div class="discription col-3">
+      <div class="discription col-3 text-color">
         <!-- This part discription of keys of Video Player -->
         <h2>Key Shotcut</h2>
-        <p>K - Pause/Play toggle</p>
+        <p>K - Pause/Play Toggle</p>
         <p>J - Backward 30 sec</p>
         <p>L - Forward 30 sec</p>
         <p>F - Fullscree toggle</p>
-        <p>D - Increase Playspeed 0.25</p>
-        <p>S - Decrease Playspeed 0.25</p>
-        <p>T - Theater Mode toggle</p>
+        <p>D - Increase Play Speed 0.25</p>
+        <p>S - Decrease Play Speed 0.25</p>
+        <p>R - Reset Play Speed</p>
         <p>I - Mini Player Toggle</p>
-        <p>M - Mute/Unmute toggle</p>
+        <p>M - Mute/Unmute Toggle</p>
+        <p>U - Increase Volumn</p>
+        <p>O - Decrease Volumn</p>
       </div>
     </div>
-
+    <div class="row m-0">
+      <p id="videoName">Video.mp4</p>
+    </div>
     <div class="row m-2">
       <div class="col-6">
         <label for="formFileLg" class="form-label">Upload Video</label>
