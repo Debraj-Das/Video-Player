@@ -14,6 +14,7 @@ const video = document.querySelector("video");
 const inputFile = document.getElementById("formFileLg");
 const options = document.getElementById("select");
 const videoName = document.getElementById("videoName");
+const videoControl = document.querySelector(".video-controls-container");
 let videoList = [];
 
 inputFile.addEventListener("change", function () {
@@ -106,8 +107,17 @@ document.addEventListener("keydown", (e) => {
     case "r":
       resetSpeed();
       break;
+      
+    case "v":
+      visualControlToggle();
+      break;
   }
 });
+
+// Visual Control
+function visualControlToggle() {
+  videoControl.classList.toggle("hide");
+}
 
 // Timeline
 timelineContainer.addEventListener("mousemove", handleTimelineUpdate);
